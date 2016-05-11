@@ -1,0 +1,45 @@
+<% if @saml_idp_fail_msg %>
+  <div id="saml_idp_fail_msg" class="flash error"><%= @saml_idp_fail_msg %></div>
+<% end %>
+
+<%= form_tag do %>
+  <%= hidden_field_tag("SAMLRequest", params[:SAMLRequest]) %>
+  <%= hidden_field_tag("RelayState", params[:RelayState]) %>
+
+  <fieldset>
+    <legend>User info</legend>
+    <p>
+      <%= label_tag :email %>
+      <%= email_field_tag :email, params[:email], :autocapitalize => "off", :autocorrect => "off", :autofocus => "autofocus", :spellcheck => "false", :size => 30, :class => "email_pwd txt" %>
+    </p>
+
+    <p>
+      <%= label_tag :password %>
+      <%= password_field_tag :password, params[:password], :autocapitalize => "off", :autocorrect => "off", :spellcheck => "false", :size => 30, :class => "email_pwd txt" %>
+      correct password: password
+    </p>
+
+    <p>
+      <%= label_tag :first_name %>
+      <%= text_field_tag :first_name, params[:first_name], :size => 30 %>
+    </p>
+
+    <p>
+      <%= label_tag :last_name %>
+      <%= text_field_tag :last_name, params[:last_name], :size => 30 %>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Settings:</legend>
+
+    <p>
+      <%= label_tag :audience_uri %>
+      <%= text_field_tag :audience_uri, params[:audience_uri], size: 30 %>
+    </p>
+  </fieldset>
+
+  <p>
+    <%= submit_tag "Sign in", :class => "button big blueish" %>
+  </p>
+<% end %>
