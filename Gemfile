@@ -1,14 +1,20 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'puma'
+gem 'rails', '8.0.2'
 gem 'saml_idp'
 
 group :development, :test do
-  gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'pry-rails'
+end
+
+group :test do
+  gem 'minitest'
+  gem 'minitest-rails'
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 4.0'
 end
 

@@ -1,4 +1,26 @@
-class SamlIdpController < SamlIdp::IdpController
+class SamlIdpController < ApplicationController
+  include SamlIdp::Controller
+  skip_forgery_protection
+
+  def new
+    # GET /saml/auth - Show SAML auth form
+    render plain: "SAML Auth Form"
+  end
+
+  def create
+    # POST /saml/auth - Process SAML authentication
+    if params[:SAMLRequest]
+      # SAML SP-initiated request
+      render plain: idp_make_saml_response(idp_authenticate(params[:email], params[:password]))
+    else
+      render plain: "Invalid SAML request"
+    end
+  end
+
+  def show
+    # GET /saml/metadata - Return SAML metadata
+    render xml: SamlIdp.metadata.signed
+  end
 
   private
 
